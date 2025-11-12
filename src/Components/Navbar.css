@@ -1,0 +1,282 @@
+/* Body Styling */
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(#EEEEEE);  /* Light modern gradient */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+
+.navbar {
+    background: white; 
+    color: white;
+    font-size: 18px;
+    /* border-bottom: 3px solid #0ea5e9; */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+    padding: 0px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out;
+}
+
+.nav-link {
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(255, 0, 0) !important;
+}
+
+.nav-item:hover {
+    background: rgb(243, 218, 218);
+}
+
+/* Cart Section */
+.d-flex .nav-link {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.Home-page .all-products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+
+.Home-page .all-products .product {
+    border: none;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.Home-page .all-products .product:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+
+.Home-page .all-products .product button {
+    padding: 8px 20px;
+    margin-top: 10px;
+    border-radius: 12px;
+    color: white;
+    background: #2563eb;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Home-page .all-products .product button:hover {
+    background: #1d4ed8;
+    box-shadow: 0px 4px 10px rgba(37, 99, 235, 0.5);
+}
+
+
+.Home-page .all-products .product .Inc-dec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.Home-page .all-products .product .Inc-dec button {
+    /* background: #000; */
+    font-weight: 900;
+}
+.billing-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.billing-page .form-billing {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+
+.form-billing label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-billing input[type="text"],
+.form-billing input[type="number"] {
+    margin-top: 6px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+.form-billing input[type="text"]:focus,
+.form-billing input[type="number"]:focus {
+    border-color: #0984e3;
+}
+
+.form-billing input[type="submit"] {
+    background: #0984e3;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-billing input[type="submit"]:hover {
+    background: #74b9ff;
+}
+.Billing-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.billing-page .table-billing  {
+  background: #fff;
+  position: relative;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.billing-page .table-billing table th ,
+.billing-page .table-billing table td{
+    border: 2px solid black;
+    padding: 5px;
+}
+.cart-empty{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buy-now{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: burlywood;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 6px 20px;
+    margin-bottom: 20px;
+}
+.table-billing table thead button{
+    margin: 10px;
+    border: none;
+    background: none;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+
+}
+.table-billing table .pay-now {
+    padding: 5PX 15px;
+    border-radius: 10px;
+    border: none;
+    background: #4778e2;
+    color: white;
+}
+.table-billing table .pay-now:hover{
+    background: #1e55cd;
+}
+.table-billing table .payment{
+    padding: 5PX 15px;
+    border-radius: 10px;
+    border: none;
+    /* text-decoration: none; */
+    color: black;
+    
+}
+.table-billing table .payment:hover{
+    background: rgb(33, 149, 33);
+    color: white;
+}
+.addtocart-like{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px
+}
+/* Common button style */
+.login,
+.register {
+  background: #007bff;              /* default blue for login */
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* Register button (different color) */
+.register {
+  background: #28a745;              /* green for register */
+  margin-left: 10px;
+}
+
+/* Hover effects */
+.login:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.register:hover {
+  background: #1e7e34;
+  transform: scale(1.05);
+}
+
+/* Optional: subtle shadow and spacing */
+.login,
+.register {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+
+@media (max-width: 768px) {
+  .login,
+  .register {
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+}
