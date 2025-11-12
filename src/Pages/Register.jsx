@@ -16,8 +16,8 @@ const Register = () => {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/signup",form);
-      // const res = await axios.post("https://your-backend.onrender.com/register",form);
+      // const res = await axios.post("http://localhost:5000/signup",form);
+      const res = await axios.post("https://cart-backend-ten.vercel.app/register",form);
        alert(res.data.message);
       
     } catch (error) {
