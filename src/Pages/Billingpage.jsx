@@ -1,116 +1,168 @@
 import React, { useContext, useState } from "react";
 import Data from "./Context";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Billingpage = ({ onclose }) => {
-  let { demos, count } = useContext(Data);
+  const { demos, count } = useContext(Data);
+  const navigate = useNavigate();
 
-  let [submit, setSubmit] = useState(false);
+  const [submit, setSubmit] = useState(false);
+  const [paynow, setPayNow] = useState(false);
 
-  let Submit = (e) => {
+  const [form, setForm] = useState({
+    name: "",
+    number: "",
+    pincode: "",
+    address: "",
+  });
+
+  // handle change for all inputs
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setSubmit(true);
   };
-  let totalprice = demos.reduce(
+
+  const handlePayment = () => {
+    navigate("/payment", { state: { username: form.name } });
+  };
+
+  const totalprice = demos.reduce(
     (total, item) => total + item.price * (count[item.id] || 1),
     0
   );
-  let totalqty = demos.reduce(
+  const totalqty = demos.reduce(
     (total, item) => total + (count[item.id] || 1),
     0
   );
 
-
-  let [paynow,setPayNow] = useState(false)
-  
-
-
   return (
-    <>
-      <div className="billing-page">
-        {submit == false && (
-          <>
-            <form onSubmit={Submit}>
-              <div className="form-billing">
-                <label htmlFor="name">
-                  Name :
-                  <input type="text" placeholder="Enter your Name" />
-                </label>
-                <label htmlFor="number">
-                  Ph. :
-                  <input type="number" placeholder="Enter your Number" />
-                </label>
-                <label htmlFor="pincode">
-                  Pincode :
-                  <input type="number" placeholder="Enter your pincode" />
-                </label>
-                <label htmlFor="Address">
-                  Addres :
-                  <input type="text" placeholder=" Enter your Full address" />
-                </label>
-                <input type="submit" value="submit" />
-              </div>
-            </form>
-          </>
-        )}
-        {submit == true && (
-          <>
-            <div className="table-billing">
-              <table>
-                <thead>
-                  <button onClick={onclose}>❌</button>
-                  <tr>
-                    <th>Id</th>
-                    <th>Order</th>
-                    <th>Title</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                {demos.map((item) => {
-                  return (
-                    <>
-                      <tbody>
-                        <tr>
-                          <td>{item.id}</td>
-                          <td>
-                            <img src={item.image} height={"100px"} alt="" />
-                          </td>
-                          <td>{item.title.slice(0, 20)}</td>
-                          <td>{count[item.id] || 1}</td>
-                          <td>{item.price * (count[item.id] || 1)} Rs.</td>
-                        </tr>
-                      </tbody>
-                    </>
-                  );
-                })}
-                <tr>
-                  <td colSpan={"3"}>Total </td>
-                  <td>{totalqty} qty.</td>
-                  <td>{totalprice} Rs.</td>
+    <div className="billing-page">
+      {!submit ? (
+        <form onSubmit={handleSubmit}>
+          <div className="form-billing">
+            <label>
+              Name :
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Enter your Name"
+                required
+              />
+            </label>
+
+            <label>
+              Ph. :
+              <input
+                type="number"
+                name="number"
+                value={form.number}
+                onChange={handleChange}
+                placeholder="Enter your Number"
+                required
+              />
+            </label>
+
+            <label>
+              Pincode :
+              <input
+                type="number"
+                name="pincode"
+                value={form.pincode}
+                onChange={handleChange}
+                placeholder="Enter your pincode"
+                required
+              />
+            </label>
+
+            <label>
+              Address :
+              <input
+                type="text"
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                placeholder="Enter your full address"
+                required
+              />
+            </label>
+
+            <input type="submit" value="Submit" />
+          </div>
+        </form>
+      ) : (
+        <div className="table-billing">
+          <table>
+            <thead>
+              <button onClick={onclose}>❌</button>
+              <tr>
+                <th>Id</th>
+                <th>Order</th>
+                <th>Title</th>
+                <th>Qty</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {demos.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>
+                    <img src={item.image} height={"100px"} alt="" />
+                  </td>
+                  <td>{item.title.slice(0, 20)}</td>
+                  <td>{count[item.id] || 1}</td>
+                  <td>{item.price * (count[item.id] || 1)} Rs.</td>
                 </tr>
+              ))}
+              <tr>
+                <td colSpan="3">Total</td>
+                <td>{totalqty} qty</td>
+                <td>{totalprice} Rs.</td>
+              </tr>
+              <tr>
                 <td style={{ border: "none", textAlign: "center" }} colSpan="5">
-                  <button className="pay-now" onClick={() => setPayNow(true)}>Pay now</button>
+                  <button className="pay-now" onClick={() => setPayNow(true)}>
+                    Pay now
+                  </button>
                 </td>
+              </tr>
 
-                {paynow && (
-                  <tr>
-
-                  <td style={{ border: "none", textAlign: "center" }} colSpan={"5"}>
-                    <div className="button-pay" style={{display:"flex", gap:"10px", alignItems:"center", justifyContent:"center"}}>
-                    <Link to="/payment" className="payment">GPay</Link>
-                    <Link to="/payment" className="payment">COD</Link>
-                    <Link to="/payment" className="payment">PhonePay</Link>
+              {paynow && (
+                <tr>
+                  <td style={{ border: "none", textAlign: "center" }} colSpan="5">
+                    <div
+                      className="button-pay"
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <button onClick={handlePayment} className="payment">
+                        GPay
+                      </button>
+                      <button onClick={handlePayment} className="payment">
+                        COD
+                      </button>
+                      <button onClick={handlePayment} className="payment">
+                        PhonePe
+                      </button>
                     </div>
                   </td>
-                  </tr>
-                )}
-              </table>
-            </div>
-          </>
-        )}
-      </div>
-    </>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
   );
 };
 

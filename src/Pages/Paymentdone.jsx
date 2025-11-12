@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Data from "./Context";
 
 const Payment = () => {
   const { demos, count, setDemos, setCount } = useContext(Data);
+  const location = useLocation()
+  const username = location.state?.username
 
   // Calculate total price
   const totalprice = demos
@@ -22,7 +24,7 @@ const Payment = () => {
   return (
     <div className="payment-success" style={styles.container}>
       <h2 style={styles.title}>Payment Successful ✅</h2>
-      {/* <h3 style={styles.name}>Thank you, {username}!</h3> */}
+      <h3 style={styles.name}>Thank you, {username}!</h3>
       <h2 style={styles.amount}>₹{orderTotal}</h2>
       <p style={styles.text}>Your order has been placed successfully!</p>
       <Link to="/" style={styles.link}>
