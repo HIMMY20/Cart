@@ -18,7 +18,8 @@
         e.preventDefault();
         try {
         // const res = await axios.post("http://localhost:5000/login",form);
-        const res = await axios.post("https://cart-backend-ten.vercel.app/login",form);
+        await axios.post("https://backend-cart-v1o5.vercel.app/login", form);
+
         if(res.data.success){
 
             localStorage.setItem("token",res.data.token)

@@ -17,7 +17,7 @@ const Register = () => {
     e.preventDefault();
     try {
       // const res = await axios.post("http://localhost:5000/signup",form);
-      const res = await axios.post("https://cart-backend-ten.vercel.app/register",form);
+      await axios.post("https://backend-cart-v1o5.vercel.app/signup", form);
        alert(res.data.message);
       
     } catch (error) {
